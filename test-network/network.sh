@@ -308,7 +308,7 @@ function createOrgs() {
 
 # The configtxgen tool is used to create the genesis block. Configtxgen consumes a
 # "configtx.yaml" file that contains the definitions for the sample network. The
-# genesis block is defiend using the "TwoOrgsOrdererGenesis" profile at the bottom
+# genesis block is defiend using the "FourOrgsOrdererGenesis" profile at the bottom
 # of the file. This profile defines a sample consortium, "SampleConsortium",
 # consisting of our two Peer Orgs. This consortium defines which organizations are
 # recognized as members of the network. The peer and ordering organizations are defined
@@ -342,7 +342,7 @@ function createConsortium() {
   # Note: For some unknown reason (at least for now) the block file can't be
   # named orderer.genesis.block or the orderer will fail to launch!
   set -x
-  configtxgen -profile TwoOrgsOrdererGenesis -channelID system-channel -outputBlock ./system-genesis-block/genesis.block
+  configtxgen -profile FourOrgsOrdererGenesis -channelID system-channel -outputBlock ./system-genesis-block/genesis.block
   res=$?
   set +x
   if [ $res -ne 0 ]; then
