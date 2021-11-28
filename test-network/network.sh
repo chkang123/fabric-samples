@@ -223,6 +223,32 @@ function createOrgs() {
     fi
 
     echo "##########################################################"
+    echo "############ Create Org3 Identities ######################"
+    echo "##########################################################"
+
+    set -x
+    cryptogen generate --config=./organizations/cryptogen/crypto-config-org3.yaml --output="organizations"
+    res=$?
+    set +x
+    if [ $res -ne 0 ]; then
+      echo "Failed to generate certificates..."
+      exit 1
+    fi
+
+    echo "##########################################################"
+    echo "############ Create Org4 Identities ######################"
+    echo "##########################################################"
+
+    set -x
+    cryptogen generate --config=./organizations/cryptogen/crypto-config-org4.yaml --output="organizations"
+    res=$?
+    set +x
+    if [ $res -ne 0 ]; then
+      echo "Failed to generate certificates..."
+      exit 1
+    fi
+
+    echo "##########################################################"
     echo "############ Create Orderer Org Identities ###############"
     echo "##########################################################"
 
@@ -272,7 +298,7 @@ function createOrgs() {
   fi
 
   echo
-  echo "Generate CCP files for Org1 and Org2"
+  echo "Generate CCP files for Org1, Org2, Org3 and Org4"
   ./organizations/ccp-generate.sh
 }
 
