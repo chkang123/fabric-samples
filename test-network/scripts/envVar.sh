@@ -44,13 +44,13 @@ setGlobals() {
     export CORE_PEER_LOCALMSPID="Org3MSP"
     export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG3_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
-    export CORE_PEER_ADDRESS=localhost:7052
+    export CORE_PEER_ADDRESS=localhost:8051
   
   elif [ $USING_ORG -eq 4 ]; then
     export CORE_PEER_LOCALMSPID="Org4MSP"
     export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG4_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org4.example.com/users/Admin@org4.example.com/msp
-    export CORE_PEER_ADDRESS=localhost:9052
+    export CORE_PEER_ADDRESS=localhost:10051
   else
     echo "================== ERROR !!! ORG Unknown =================="
   fi
