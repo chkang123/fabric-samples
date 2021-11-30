@@ -51,9 +51,9 @@ type QueryResult_Dev struct {
 }
 
 type QueryResult_All struct {
-	Record_Com QueryResult_Com `json:"Com"`
-	Record_Part QueryResult_Part `json:"Part"`
-	Record_Dev QueryResult_Dev `json:"Dev"`
+	Record_Com []QueryResult_Com `json:"Com"`
+	Record_Part []QueryResult_Part `json:"Part"`
+	Record_Dev []QueryResult_Dev `json:"Dev"`
 }
 
 // InitLedger
@@ -191,7 +191,7 @@ func (s *SmartContract) QueryDev(ctx contractapi.TransactionContextInterface, de
 		return nil, fmt.Errorf("%s does not exist", devID)
 	}
 
-	dev := new(Commodity)
+	dev := new(Device)
 	_ = json.Unmarshal(devAsBytes, dev)
 
 	return dev, nil
