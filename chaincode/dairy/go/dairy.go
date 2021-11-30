@@ -254,20 +254,20 @@ func (s *SmartContract) QueryAll(ctx contractapi.TransactionContextInterface) (Q
 	results_Part := []QueryResult_Part{}
 	results_Dev := []QueryResult_Dev{}
 
-	results_Com.append(new(QueryResult_Com(Key:"COM1", Record:QueryCom("COM1"))))
-	results_Com.append(new(QueryResult_Com(Key:"COM2", Record:QueryCom("COM2"))))
-	results_Com.append(new(QueryResult_Com(Key:"COM3", Record:QueryCom("COM3"))))
-	results_Com.append(new(QueryResult_Com(Key:"COM4", Record:QueryCom("COM4"))))
+	results_Com.append(new(QueryResult_Com(Key:"COM1", Record:QueryCom("COM1"),)))
+	results_Com.append(new(QueryResult_Com(Key:"COM2", Record:QueryCom("COM2"),)))
+	results_Com.append(new(QueryResult_Com(Key:"COM3", Record:QueryCom("COM3"),)))
+	results_Com.append(new(QueryResult_Com(Key:"COM4", Record:QueryCom("COM4"),)))
 
-	results_Part.append(new(QueryResult_Part(Key:"PART1", Record:QueryPart("PART1"))))
-	results_Part.append(new(QueryResult_Part(Key:"PART2", Record:QueryPart("PART2"))))
-	results_Part.append(new(QueryResult_Part(Key:"PART3", Record:QueryPart("PART3"))))
-	results_Part.append(new(QueryResult_Part(Key:"PART4", Record:QueryPart("PART4"))))
+	results_Part.append(new(QueryResult_Part(Key:"PART1", Record:QueryPart("PART1"),)))
+	results_Part.append(new(QueryResult_Part(Key:"PART2", Record:QueryPart("PART2"),)))
+	results_Part.append(new(QueryResult_Part(Key:"PART3", Record:QueryPart("PART3"),)))
+	results_Part.append(new(QueryResult_Part(Key:"PART4", Record:QueryPart("PART4"),)))
 
-	results_Dev.append(new(QueryResult_Dev(Key:"DEV1", Record:QueryDev("DEV1"))))
-	results_Dev.append(new(QueryResult_Dev(Key:"DEV2", Record:QueryDev("DEV2"))))
-	results_Dev.append(new(QueryResult_Dev(Key:"DEV3", Record:QueryDev("DEV3"))))
-	results_Dev.append(new(QueryResult_Dev(Key:"DEV4", Record:QueryDev("DEV4"))))
+	results_Dev.append(new(QueryResult_Dev(Key:"DEV1", Record:QueryDev("DEV1"),)))
+	results_Dev.append(new(QueryResult_Dev(Key:"DEV2", Record:QueryDev("DEV2"),)))
+	results_Dev.append(new(QueryResult_Dev(Key:"DEV3", Record:QueryDev("DEV3"),)))
+	results_Dev.append(new(QueryResult_Dev(Key:"DEV4", Record:QueryDev("DEV4"),)))
 
 	queryResult := QueryResult_All{Record_Com: results_Com, Record_Part: results_Part, Record_Dev: results_Dev}
 
