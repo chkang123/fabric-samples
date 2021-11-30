@@ -254,31 +254,31 @@ func (s *SmartContract) QueryAll(ctx contractapi.TransactionContextInterface) (Q
 	results_Part := []QueryResult_Part{}
 	results_Dev := []QueryResult_Dev{}
 
-	com1, err := s.QueryCom(ctx, "COM1")
+	com1, _ := s.QueryCom(ctx, "COM1")
 	results_Com = append(results_Com, QueryResult_Com{Key:"COM1", Record:com1})
-	com2, err := s.QueryCom(ctx, "COM2")
+	com2, _ := s.QueryCom(ctx, "COM2")
 	results_Com = append(results_Com, QueryResult_Com{Key:"COM2", Record:com2})
-	com3, err := s.QueryCom(ctx, "COM3")
+	com3, _ := s.QueryCom(ctx, "COM3")
 	results_Com = append(results_Com, QueryResult_Com{Key:"COM3", Record:com3})
-	com4, err := s.QueryCom(ctx, "COM4")
+	com4, _ := s.QueryCom(ctx, "COM4")
 	results_Com = append(results_Com, QueryResult_Com{Key:"COM4", Record:com4})
 
-	part1, err := s.QueryPart(ctx, "PART1")
+	part1, _ := s.QueryPart(ctx, "PART1")
 	results_Part = append(results_Part, QueryResult_Part{Key:"PART1", Record:part1})
-	part2, err := s.QueryPart(ctx, "PART2")
+	part2, _ := s.QueryPart(ctx, "PART2")
 	results_Part = append(results_Part, QueryResult_Part{Key:"PART2", Record:part2})
-	part3, err := s.QueryPart(ctx, "PART3")
+	part3, _ := s.QueryPart(ctx, "PART3")
 	results_Part = append(results_Part, QueryResult_Part{Key:"PART3", Record:part3})
-	part4, err := s.QueryPart(ctx, "PART4")
+	part4, _ := s.QueryPart(ctx, "PART4")
 	results_Part = append(results_Part, QueryResult_Part{Key:"PART4", Record:part4})
 
-	dev1, err := s.QueryDev(ctx, "DEV1")
+	dev1, _ := s.QueryDev(ctx, "DEV1")
 	results_Dev = append(results_Dev, QueryResult_Dev{Key:"DEV1", Record:dev1})
-	dev2, err := s.QueryDev(ctx, "DEV2")
+	dev2, _ := s.QueryDev(ctx, "DEV2")
 	results_Dev = append(results_Dev, QueryResult_Dev{Key:"DEV2", Record:dev2})
-	dev3, err := s.QueryDev(ctx, "DEV3")
+	dev3, _ := s.QueryDev(ctx, "DEV3")
 	results_Dev = append(results_Dev, QueryResult_Dev{Key:"DEV3", Record:dev3})
-	dev4, err := s.QueryDev(ctx, "DEV4")
+	dev4, _ := s.QueryDev(ctx, "DEV4")
 	results_Dev = append(results_Dev, QueryResult_Dev{Key:"DEV4", Record:dev4})
 
 	queryResult := QueryResult_All{Record_Com: results_Com, Record_Part: results_Part, Record_Dev: results_Dev}
