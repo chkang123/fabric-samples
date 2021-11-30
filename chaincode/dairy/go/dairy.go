@@ -115,7 +115,7 @@ func (s *SmartContract) CreateCom(ctx contractapi.TransactionContextInterface, i
 		Trust_score: score,
 		Owners: []string{owner},
 		Readings: readings,
-		Ideal_Temp: ideal
+		Ideal_Temp: ideal,
 	}
 
 	comAsBytes, _ := json.Marshal(com)
@@ -127,7 +127,7 @@ func (s *SmartContract) CreatePart(ctx contractapi.TransactionContextInterface, 
 	part := Participant{
 		ID: id,
 		Reputation_score: score,
-		Device_IDs: device_ids
+		Device_IDs: device_ids,
 	}
 
 	partAsBytes, _ := json.Marshal(part)
@@ -138,7 +138,7 @@ func (s *SmartContract) CreatePart(ctx contractapi.TransactionContextInterface, 
 func (s *SmartContract) CreateDev(ctx contractapi.TransactionContextInterface, id string, dev_type string) error {
 	dev := Device{
 		ID: id,
-		Type: dev_type
+		Type: dev_type,
 	}
 
 	devAsBytes, _ := json.Marshal(dev)
