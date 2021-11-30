@@ -59,10 +59,10 @@ type QueryResult_All struct {
 // InitLedger
 func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) error {
 	commodities := []Commodity{
-		Commodity{ID: "COM1", Trust_score: 5, Owners: ["PART1"], Readings: 25, Ideal_Temp: 10},
-		Commodity{ID: "COM2", Trust_score: 5, Owners: ["PART2"], Readings: 25, Ideal_Temp: 20},
-		Commodity{ID: "COM3", Trust_score: 5, Owners: ["PART3"], Readings: 25, Ideal_Temp: 30},
-		Commodity{ID: "COM4", Trust_score: 5, Owners: ["PART4"], Readings: 25, Ideal_Temp: 40},
+		Commodity{ID: "COM1", Trust_score: 5, Owners: []string{"PART1"}, Readings: 25, Ideal_Temp: 10},
+		Commodity{ID: "COM2", Trust_score: 5, Owners: []string{"PART2"}, Readings: 25, Ideal_Temp: 20},
+		Commodity{ID: "COM3", Trust_score: 5, Owners: []string{"PART3"}, Readings: 25, Ideal_Temp: 30},
+		Commodity{ID: "COM4", Trust_score: 5, Owners: []string{"PART4"}, Readings: 25, Ideal_Temp: 40},
 	}
 
 	for i, com := range commodities {
@@ -75,10 +75,10 @@ func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) 
 	}
 
 	participants := []Participant{
-		Participant{ID: "PART1", Reputation_score: 1, Device_IDs: ["DEV1"]},
-		Participant{ID: "PART2", Reputation_score: 1, Device_IDs: ["DEV2"]},
-		Participant{ID: "PART3", Reputation_score: 2, Device_IDs: ["DEV3"]},
-		Participant{ID: "PART4", Reputation_score: 3, Device_IDs: ["DEV4"]},
+		Participant{ID: "PART1", Reputation_score: 1, Device_IDs: []string{"DEV1"}},
+		Participant{ID: "PART2", Reputation_score: 1, Device_IDs: []string{"DEV2"}},
+		Participant{ID: "PART3", Reputation_score: 2, Device_IDs: []string{"DEV3"}},
+		Participant{ID: "PART4", Reputation_score: 3, Device_IDs: []string{"DEV4"}},
 	}
 
 	for i, part := range participants {
@@ -113,7 +113,7 @@ func (s *SmartContract) CreateCom(ctx contractapi.TransactionContextInterface, i
 	com := Commodity{
 		ID: id,
 		Trust_score: score,
-		Owners: [owner],
+		Owners: []string{owner},
 		Readings: readings,
 		Ideal_Temp: ideal
 	}
@@ -123,11 +123,11 @@ func (s *SmartContract) CreateCom(ctx contractapi.TransactionContextInterface, i
 	return ctx.GetStub().PutState(id, comAsBytes)
 }
 
-func (s *SmartContract) CreatePart(ctx contractapi.TransactionContextInterface, id string, score float32, device_id string) error {
+func (s *SmartContract) CreatePart(ctx contractapi.TransactionContextInterface, id string, score float32, device_ids []string) error {
 	part := Participant{
 		ID: id,
 		Reputation_score: score,
-		Device_IDs: [device_id]
+		Device_IDs: device_ids
 	}
 
 	partAsBytes, _ := json.Marshal(part)
