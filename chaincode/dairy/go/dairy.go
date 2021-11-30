@@ -198,6 +198,7 @@ func (s *SmartContract) QueryDev(ctx contractapi.TransactionContextInterface, de
 }
 
 func (s *SmartContract) QueryAll(ctx contractapi.TransactionContextInterface) (QueryResult_All, error) {
+	/*
 	startKey := ""
 	endKey := ""
 
@@ -247,6 +248,30 @@ func (s *SmartContract) QueryAll(ctx contractapi.TransactionContextInterface) (Q
 	queryResult := QueryResult_All{Record_Com: results_Com, Record_Part: results_Part, Record_Dev: results_Dev}
 
 	return queryResult, nil
+	*/
+
+	results_Com := []QueryResult_Com{}
+	results_Part := []QueryResult_Part{}
+	results_Dev := []QueryResult_Dev{}
+
+	results_Com.append(new(QueryResult_Com(Key:"COM1",Record:QueryCom("COM1"))))
+	results_Com.append(new(QueryResult_Com(Key:"COM2",Record:QueryCom("COM2"))))
+	results_Com.append(new(QueryResult_Com(Key:"COM3",Record:QueryCom("COM3"))))
+	results_Com.append(new(QueryResult_Com(Key:"COM4",Record:QueryCom("COM4"))))
+
+	results_Part.append(new(QueryResult_Part(Key:"PART1",Record:QueryPart("PART1"))))
+	results_Part.append(new(QueryResult_Part(Key:"PART1",Record:QueryPart("PART1"))))
+	results_Part.append(new(QueryResult_Part(Key:"PART1",Record:QueryPart("PART1"))))
+	results_Part.append(new(QueryResult_Part(Key:"PART1",Record:QueryPart("PART1"))))
+
+	results_Dev.append(new(QueryResult_Dev(Key:"DEV1",Record:QueryDev("DEV1"))))
+	results_Dev.append(new(QueryResult_Dev(Key:"DEV2",Record:QueryDev("DEV2"))))
+	results_Dev.append(new(QueryResult_Dev(Key:"DEV3",Record:QueryDev("DEV3"))))
+	results_Dev.append(new(QueryResult_Dev(Key:"DEV4",Record:QueryDev("DEV4"))))
+
+	queryResult := QueryResult_All{Record_Com: results_Com, Record_Part: results_Part, Record_Dev: results_Dev}
+
+	return queryResult, nil
 }
 
 // ChangeCarOwner updates the owner field of car with given id in world state
@@ -257,7 +282,7 @@ func (s *SmartContract) ChangeComOwner(ctx contractapi.TransactionContextInterfa
 		return err
 	}
 
-	com.Owner = append(com.Owners, newOwner)
+	com.Owners = append(com.Owners, newOwner)
 
 	comAsBytes, _ := json.Marshal(com)
 
