@@ -254,20 +254,32 @@ func (s *SmartContract) QueryAll(ctx contractapi.TransactionContextInterface) (Q
 	results_Part := []QueryResult_Part{}
 	results_Dev := []QueryResult_Dev{}
 
-	results_Com = append(results_Com, QueryResult_Com{Key:"COM1", Record:QueryCom("COM1")})
-	results_Com = append(results_Com, QueryResult_Com{Key:"COM2", Record:QueryCom("COM2")})
-	results_Com = append(results_Com, QueryResult_Com{Key:"COM3", Record:QueryCom("COM3")})
-	results_Com = append(results_Com, QueryResult_Com{Key:"COM4", Record:QueryCom("COM4")})
+	com1, err := s.QueryCom(ctx, "COM1")
+	results_Com = append(results_Com, QueryResult_Com{Key:"COM1", Record:com1})
+	com2, err := s.QueryCom(ctx, "COM2")
+	results_Com = append(results_Com, QueryResult_Com{Key:"COM2", Record:com2})
+	com3, err := s.QueryCom(ctx, "COM3")
+	results_Com = append(results_Com, QueryResult_Com{Key:"COM3", Record:com3})
+	com4, err := s.QueryCom(ctx, "COM4")
+	results_Com = append(results_Com, QueryResult_Com{Key:"COM4", Record:com4})
 
-	results_Part = append(results_Part, QueryResult_Part{Key:"PART1", Record:QueryPart("PART1")})
-	results_Part = append(results_Part, QueryResult_Part{Key:"PART2", Record:QueryPart("PART2")})
-	results_Part = append(results_Part, QueryResult_Part{Key:"PART3", Record:QueryPart("PART3")})
-	results_Part = append(results_Part, QueryResult_Part{Key:"PART4", Record:QueryPart("PART4")})
+	part1, err := s.QueryPart(ctx, "PART1")
+	results_Part = append(results_Part, QueryResult_Part{Key:"PART1", Record:part1})
+	part2, err := s.QueryPart(ctx, "PART2")
+	results_Part = append(results_Part, QueryResult_Part{Key:"PART2", Record:part2})
+	part3, err := s.QueryPart(ctx, "PART3")
+	results_Part = append(results_Part, QueryResult_Part{Key:"PART3", Record:part3})
+	part4, err := s.QueryPart(ctx, "PART4")
+	results_Part = append(results_Part, QueryResult_Part{Key:"PART4", Record:part4})
 
-	results_Dev = append(results_Dev, QueryResult_Dev{Key:"DEV1", Record:QueryDev("DEV1")})
-	results_Dev = append(results_Dev, QueryResult_Dev{Key:"DEV2", Record:QueryDev("DEV2")})
-	results_Dev = append(results_Dev, QueryResult_Dev{Key:"DEV3", Record:QueryDev("DEV3")})
-	results_Dev = append(results_Dev, QueryResult_Dev{Key:"DEV4", Record:QueryDev("DEV4")})
+	dev1, err := s.QueryDev(ctx, "DEV1")
+	results_Dev = append(results_Dev, QueryResult_Dev{Key:"DEV1", Record:dev1})
+	dev2, err := s.QueryDev(ctx, "DEV2")
+	results_Dev = append(results_Dev, QueryResult_Dev{Key:"DEV2", Record:dev2})
+	dev3, err := s.QueryDev(ctx, "DEV3")
+	results_Dev = append(results_Dev, QueryResult_Dev{Key:"DEV3", Record:dev3})
+	dev4, err := s.QueryDev(ctx, "DEV4")
+	results_Dev = append(results_Dev, QueryResult_Dev{Key:"DEV4", Record:dev4})
 
 	queryResult := QueryResult_All{Record_Com: results_Com, Record_Part: results_Part, Record_Dev: results_Dev}
 
