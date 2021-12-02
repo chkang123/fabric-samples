@@ -125,11 +125,11 @@ func (s *SmartContract) CreateCom(ctx contractapi.TransactionContextInterface, i
 	return ctx.GetStub().PutState(id, comAsBytes)
 }
 
-func (s *SmartContract) CreatePart(ctx contractapi.TransactionContextInterface, id string, score float32, device_ids []string) error {
+func (s *SmartContract) CreatePart(ctx contractapi.TransactionContextInterface, id string, score float32) error {
 	part := Participant{
 		ID: id,
 		Reputation_score: score,
-		Device_IDs: device_ids,
+		Device_IDs: []string{},
 	}
 
 	partAsBytes, _ := json.Marshal(part)
