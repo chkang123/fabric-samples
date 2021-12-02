@@ -117,6 +117,7 @@ func (s *SmartContract) CreateCom(ctx contractapi.TransactionContextInterface, i
 		Owners: []string{owner},
 		Readings: readings,
 		Ideal_Temp: ideal,
+		Parents_IDs: []string{},
 	}
 
 	comAsBytes, _ := json.Marshal(com)
