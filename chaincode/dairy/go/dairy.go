@@ -324,7 +324,7 @@ func (s *SmartContract) ProduceCom(ctx contractapi.TransactionContextInterface, 
 	newCom := Commodity{
 		ID: id,
 		Trust_score: trust_score,
-		Owners: [coms[0].Owners[len(coms[0].Owners)-1]],
+		Owners: []string{coms[0].Owners[len(coms[0].Owners)-1]},
 		Readings: float32(0),
 		Ideal_Temp: ideal,
 		Parents_IDs: parents_ids,
