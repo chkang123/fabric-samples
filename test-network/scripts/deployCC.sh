@@ -78,7 +78,7 @@ installChaincode() {
   ORG=$1
   setGlobals $ORG
   set -x
-  peer lifecycle chaincode install -n dairy dairy.tar.gz >&log.txt
+  peer lifecycle chaincode install dairy.tar.gz >&log.txt
   res=$?
   set +x
   cat log.txt
