@@ -148,6 +148,10 @@ func (s *SmartContract) CreateDev(ctx contractapi.TransactionContextInterface, i
 	return ctx.GetStub().PutState(id, devAsBytes)
 }
 
+func (s *SmartContract) DeleteData(ctx contractapi.TransactionContextInterface, id string) error {
+	return ctx.GetStub().DelState(id)
+}
+
 func (s *SmartContract) QueryCom(ctx contractapi.TransactionContextInterface, comID string) (*Commodity, error) {
 	comAsBytes, err := ctx.GetStub().GetState(comID)
 
