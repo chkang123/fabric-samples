@@ -319,9 +319,9 @@ func (s *SmartContract) ProduceCom(ctx contractapi.TransactionContextInterface, 
 		trust_score = trust_score + com.Trust_score
 		parents_ids = append(parents_ids, com.ID)
 	}
-	trust_score = trust_score / len(coms)
+	trust_score = trust_score / float32(len(coms))
 
-	newCom := Commodity{ID: id, Trust_score: trust_score, Owners: coms[0].Owners[len(coms[0].Owners)-1], Readings: 0, Ideal_Temp: ideal, Parents_IDs: parents_ids}
+	newCom := Commodity{ID: id, Trust_score: trust_score, Owners: [coms[0].Owners[len(coms[0].Owners)-1]], Readings: 0, Ideal_Temp: ideal, Parents_IDs: parents_ids}
 
 	comAsBytes, _ := json.Marshal(newCom)
 
