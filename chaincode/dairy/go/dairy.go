@@ -22,6 +22,7 @@ type Commodity struct {
 	Owners    			[]string 	`json:"owners"`
 	Readings        	float32 	`json:"readings"`
 	Ideal_Temp      	float32 	`json:"ideal_temp"`
+	Parents_IDs			[]string	`json:"parents_ids"`
  }
 
 type Participant struct {
@@ -59,10 +60,10 @@ type QueryResult_All struct {
 // InitLedger
 func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) error {
 	commodities := []Commodity{
-		Commodity{ID: "COM1", Trust_score: 5, Owners: []string{"PART1"}, Readings: 25, Ideal_Temp: 10},
-		Commodity{ID: "COM2", Trust_score: 5, Owners: []string{"PART2"}, Readings: 25, Ideal_Temp: 20},
-		Commodity{ID: "COM3", Trust_score: 5, Owners: []string{"PART3"}, Readings: 25, Ideal_Temp: 30},
-		Commodity{ID: "COM4", Trust_score: 5, Owners: []string{"PART4"}, Readings: 25, Ideal_Temp: 40},
+		Commodity{ID: "COM1", Trust_score: 5, Owners: []string{"PART1"}, Readings: 25, Ideal_Temp: 10, Parents_IDs: []string{}},
+		Commodity{ID: "COM2", Trust_score: 5, Owners: []string{"PART2"}, Readings: 25, Ideal_Temp: 20, Parents_IDs: []string{}},
+		Commodity{ID: "COM3", Trust_score: 5, Owners: []string{"PART3"}, Readings: 25, Ideal_Temp: 30, Parents_IDs: []string{}},
+		Commodity{ID: "COM4", Trust_score: 5, Owners: []string{"PART4"}, Readings: 25, Ideal_Temp: 40, Parents_IDs: []string{}},
 	}
 
 	for i, com := range commodities {
@@ -286,8 +287,8 @@ func (s *SmartContract) QueryAll(ctx contractapi.TransactionContextInterface) (Q
 	return queryResult, nil
 }
 
-// ChangeCarOwner updates the owner field of car with given id in world state
-func (s *SmartContract) ChangeComOwner(ctx contractapi.TransactionContextInterface, comNumber string, newOwner string) error {
+// Trade
+func (s *SmartContract) TradeCom(ctx contractapi.TransactionContextInterface, comNumber string, newOwner string) error {
 	com, err := s.QueryCom(ctx, comNumber)
 
 	if err != nil {
@@ -299,6 +300,27 @@ func (s *SmartContract) ChangeComOwner(ctx contractapi.TransactionContextInterfa
 	comAsBytes, _ := json.Marshal(com)
 
 	return ctx.GetStub().PutState(comNumber, comAsBytes)
+}
+
+// Produce
+func (s *SmartContract) ProduceCom(ctx contractapi.TransactionContextInterface, comNumbers []string, id string, ideal float32) error {
+	coms := []*Commodity{}
+	var trust_score float32 = 0
+	parents_ids := []string{}
+
+	for _, comNumber := range comNumbers {
+		com, _ := s.QueryCom(ctx, comNumber)
+		coms = append(coms, com)
+		trust_score = trust_score + com.Trust_score
+		parents_ids = append(parents_ids, com.ID)
+	}
+	trust_score = trust_score / len(coms)
+
+	newCom := Commodity{ID: id, Trust_score: trust_score, Owners: coms[0].Owners[len(coms[0].Owners)-1], Readings: 0, Ideal_Temp: ideal, Parents_IDs: parents_ids}
+
+	comAsBytes, _ := json.Marshal(newCom)
+
+	return ctx.GetStub().PutState(id, comAsBytes)
 }
 
 func main() {
