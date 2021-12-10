@@ -308,7 +308,8 @@ func (s *SmartContract) TradeCom(ctx contractapi.TransactionContextInterface, co
 }
 
 // Produce
-func (s *SmartContract) ProduceCom(ctx contractapi.TransactionContextInterface, comNumbers []string, id string, ideal float32) error {
+func (s *SmartContract) ProduceCom(ctx contractapi.TransactionContextInterface, comNumber1 string, comNumber2 string, id string, ideal float32) error {
+	comNumbers := []string{comNumber1, comNumber2}
 	coms := []*Commodity{}
 	var trust_score float32 = 0
 	parents_ids := []string{}
