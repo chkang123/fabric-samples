@@ -313,7 +313,7 @@ func (s *SmartContract) QueryAll(ctx contractapi.TransactionContextInterface) (Q
 func (s *SmartContract) TradeCom(ctx contractapi.TransactionContextInterface, comNumber string, newOwner string) error {
 	var gamma float32 = 0.5
 	psai := []float32{1, 1, -1, 1, -1}
-	tc := []float32{0.92, 0.85 0.73, 0.67, 0.81}
+	tc := []float32{0.92, 0.85, 0.73, 0.67, 0.81}
 
 	var wt float32 = 0.3
 	var wT float32 = 0.4
