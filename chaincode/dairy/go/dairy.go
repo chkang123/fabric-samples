@@ -393,6 +393,30 @@ func (s *SmartContract) TradeCom(ctx contractapi.TransactionContextInterface, co
 	return ctx.GetStub().PutState(comNumber, comAsBytes)
 }
 
+func (s *SmartContract) TradeCom_Base(ctx contractapi.TransactionContextInterface, comNumber string, newOwner string) error {
+	com, err := s.QueryCom(ctx, comNumber)
+
+	if err != nil {
+		return err
+	}
+
+	var owner string = com.Owners[len(com.Owners)-1]
+	com.Owners = append(com.Owners, newOwner)
+	comAsBytes, _ := json.Marshal(com)
+
+	part1, _ := s.QueryPart(ctx, owner)
+	part1.Com_IDs = append(part1.Com_IDs[1:], part1.Com_IDs[0])
+	part1AsBytes, _ := json.Marshal(part1)
+	ctx.GetStub().PutState(owner, part1AsBytes)
+
+	part2, _ := s.QueryPart(ctx, newOwner)
+	part2.Com_IDs = append(part2.Com_IDs[1:], part2.Com_IDs[0])
+	part2AsBytes, _ := json.Marshal(part2)
+	ctx.GetStub().PutState(owner, part2AsBytes)
+
+	return ctx.GetStub().PutState(comNumber, comAsBytes)
+}
+
 // Produce
 func (s *SmartContract) ProduceCom(ctx contractapi.TransactionContextInterface, comNumber1 string, comNumber2 string, id string, ideal float32) error {
 	comNumbers := []string{comNumber1, comNumber2}
