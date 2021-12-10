@@ -30,7 +30,7 @@ type Participant struct {
 	Trust_score     	float32 	`json:"trust_score"`
 	Reputation_score    float32 	`json:"reputation_score"`
 	Device_IDs    		[]string 	`json:"device_ids"`
-	Com_IDs			[]string	`json:"com_ids"`
+	Com_IDs				[]string	`json:"com_ids"`
 }
 
 type Device struct {
@@ -342,13 +342,13 @@ func (s *SmartContract) TradeCom(ctx contractapi.TransactionContextInterface, co
 		com, _ = s.QueryCom(ctx, com_id)
 		tn1 = tn1 + com.Trust_score
 	}
-	tn1 = tn1 / (len(part1.Com_IDs) - 1)
+	tn1 = tn1 / float32(len(part1.Com_IDs) - 1)
 
 	var sigma float32 = 0
 	for i := 0; i<len(psai); i++ {
 		sigma = sigma + psai[i] * tc[i]
 	}
-	sigma = sigma / len(psai)
+	sigma = sigma / float32(len(psai))
 	part1.Trust_score = part1.Trust_score * gamma + (1 - gamma) * sigma
 
 	var En float32 = 0
@@ -369,13 +369,13 @@ func (s *SmartContract) TradeCom(ctx contractapi.TransactionContextInterface, co
 		com, _ = s.QueryCom(ctx, com_id)
 		tn2 = tn2 + com.Trust_score
 	}
-	tn2 = tn2 / (len(part2.Com_IDs) + 1)
+	tn2 = tn2 / float32(len(part2.Com_IDs) + 1)
 
 	sigma = 0
 	for i := 0; i<len(psai); i++ {
 		sigma = sigma + psai[i] * tc[i]
 	}
-	sigma = sigma / len(psai)
+	sigma = sigma / float32(len(psai))
 	part2.Trust_score = part2.Trust_score * gamma + (1 - gamma) * sigma
 
 	En = 0
