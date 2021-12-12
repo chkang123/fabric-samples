@@ -446,6 +446,32 @@ func (s *SmartContract) ProduceCom(ctx contractapi.TransactionContextInterface, 
 	return ctx.GetStub().PutState(id, comAsBytes)
 }
 
+func (s *SmartContract) ProduceCom_Base(ctx contractapi.TransactionContextInterface, comNumber1 string, comNumber2 string, id string, ideal float32) error {
+	comNumbers := []string{comNumber1, comNumber2}
+	coms := []*Commodity{}
+	var trust_score float32 = 0
+	parents_ids := []string{}
+
+	for _, comNumber := range comNumbers {
+		com, _ := s.QueryCom(ctx, comNumber)
+		coms = append(coms, com)
+		parents_ids = append(parents_ids, com.ID)
+	}
+
+	newCom := Commodity{
+		ID: id,
+		Trust_score: trust_score,
+		Owners: []string{coms[0].Owners[len(coms[0].Owners)-1]},
+		Readings: float32(0),
+		Ideal_Temp: ideal,
+		Parents_IDs: parents_ids,
+	}
+
+	comAsBytes, _ := json.Marshal(newCom)
+
+	return ctx.GetStub().PutState(id, comAsBytes)
+}
+
 func main() {
 
 	chaincode, err := contractapi.NewChaincode(new(SmartContract))
